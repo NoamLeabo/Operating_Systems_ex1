@@ -2,18 +2,18 @@ import sys
 import chess.pgn
 
 def parse_moves(pgn_moves):
-    # Remove the last 5 characters from the PGN moves string
-    pgn_moves = pgn_moves[:-5]
 
     # Create a new game
     game = chess.pgn.Game()
-    
+
     # Set up a node for adding moves
     node = game
 
-    # Split and filter out move numbers
+    # Split and filter out move numbers and results
     moves = pgn_moves.split()
-    filtered_moves = [move for move in moves if not move.endswith('.')]
+    filtered_moves = [
+        move for move in moves if not move.endswith('.') and move not in ['1-0', '0-1', '1/2-1/2', '*']
+    ]
 
     # Add moves to the game
     for move in filtered_moves:
