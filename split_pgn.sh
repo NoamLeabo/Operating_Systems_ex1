@@ -12,7 +12,7 @@ pgn_src_file=$1
 pgn_des_dir=$2
 
 # now we save the base name of the src file to use it later
-pgn_base_name=$(basename "$pgn_src_file")
+pgn_base_name=$(basename "$pgn_src_file" .pgn)
 
 # we check if the src file acctually exists
 if [ ! -f $pgn_src_file ]; then

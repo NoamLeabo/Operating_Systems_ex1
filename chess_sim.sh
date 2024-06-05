@@ -122,7 +122,6 @@ handle_input() {
     while true; do
         echo "Press 'd' to move forward, 'a' to move back, 'w' to go to the start, 's' to go to the end, 'q' to quit:"
         read -n 1 key
-        echo
 
         case $key in
             d)
@@ -130,7 +129,6 @@ handle_input() {
                     moves_history+=(${uci_moves_array[$move_index]})
                     ((move_index++))
                     display_board
-                    echo
                 else
                     echo "No more moves available."
                 fi
@@ -139,6 +137,8 @@ handle_input() {
                 if [ $move_index -gt 0 ]; then
                     ((move_index--))
                     unset moves_history[$move_index]
+                    display_board
+                else
                     display_board
                 fi
                 ;;
@@ -154,6 +154,7 @@ handle_input() {
                 ;;
             q)
                 echo "Exiting."
+                echo End of game.
                 exit 0
                 ;;
             *)
