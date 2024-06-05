@@ -86,12 +86,21 @@ display_board() {
         
         # Handle promotion
         if [ -n "$promotion" ]; then
-            case $promotion in
-                q) piece='Q' ;;
-                r) piece='R' ;;
-                b) piece='B' ;;
-                n) piece='N' ;;
-            esac
+            if [[ $piece =~ [P] ]]; then
+                case $promotion in
+                    q) piece='Q' ;;
+                    r) piece='R' ;;
+                    b) piece='B' ;;
+                    n) piece='N' ;;
+                esac
+            else
+                case $promotion in
+                    q) piece='q' ;;
+                    r) piece='r' ;;
+                    b) piece='b' ;;
+                    n) piece='n' ;;
+                esac
+            fi
         fi
         
         board[$from_row]="${board[$from_row]:0:$((from_col * 2))}. ${board[$from_row]:$((from_col * 2 + 2))}"
