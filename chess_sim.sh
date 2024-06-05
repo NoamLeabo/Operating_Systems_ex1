@@ -121,7 +121,7 @@ display_board() {
 handle_input() {
     while true; do
         echo "Press 'd' to move forward, 'a' to move back, 'w' to go to the start, 's' to go to the end, 'q' to quit:"
-        read -n 1 key
+        read key
 
         case $key in
             d)
