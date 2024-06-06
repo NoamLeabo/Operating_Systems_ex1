@@ -123,6 +123,16 @@ display_board() {
                 continue
             fi
         fi
+
+        # Handle en passant
+        if [[ $piece =~ [Pp] && $((from_col != to_col)) && ${board[$to_row]:$((to_col * 2)):1} == "." ]]; then
+            if [[ $piece == "P" ]]; then
+                en_passant_row=$((to_row + 1))
+            else
+                en_passant_row=$((to_row - 1))
+            fi
+            board[$en_passant_row]="${board[$en_passant_row]:0:$((to_col * 2))}. ${board[$en_passant_row]:$((to_col * 2 + 2))}"
+        fi
         
         board[$from_row]="${board[$from_row]:0:$((from_col * 2))}. ${board[$from_row]:$((from_col * 2 + 2))}"
         board[$to_row]="${board[$to_row]:0:$((to_col * 2))}$piece ${board[$to_row]:$((to_col * 2 + 2))}"
