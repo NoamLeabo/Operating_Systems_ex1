@@ -102,6 +102,27 @@ display_board() {
                 esac
             fi
         fi
+
+        # Handle castling
+        if [[ $piece == "K" || $piece == "k" ]]; then
+            if [[ $from == "e1" && $to == "g1" ]]; then
+                # White kingside castling
+                board[7]="R N B Q . R K . "
+                continue
+            elif [[ $from == "e1" && $to == "c1" ]]; then
+                # White queenside castling
+                board[7]=". . K R Q B N R "
+                continue
+            elif [[ $from == "e8" && $to == "g8" ]]; then
+                # Black kingside castling
+                board[0]="r n b q . r k . "
+                continue
+            elif [[ $from == "e8" && $to == "c8" ]]; then
+                # Black queenside castling
+                board[0]=". . k r q b n r "
+                continue
+            fi
+        fi
         
         board[$from_row]="${board[$from_row]:0:$((from_col * 2))}. ${board[$from_row]:$((from_col * 2 + 2))}"
         board[$to_row]="${board[$to_row]:0:$((to_col * 2))}$piece ${board[$to_row]:$((to_col * 2 + 2))}"
