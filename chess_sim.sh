@@ -107,19 +107,19 @@ display_board() {
         if [[ $piece == "K" || $piece == "k" ]]; then
             if [[ $from == "e1" && $to == "g1" ]]; then
                 # White kingside castling
-                board[7]="R N B Q . R K . "
+                board[7]="${board[7]:0:8}. R K . "
                 continue
             elif [[ $from == "e1" && $to == "c1" ]]; then
                 # White queenside castling
-                board[7]=". . K R Q B N R "
+                board[7]=". . K R . ${board[7]:10:16}"
                 continue
             elif [[ $from == "e8" && $to == "g8" ]]; then
                 # Black kingside castling
-                board[0]="r n b q . r k . "
+                board[0]="${board[0]:0:8}. r k . "
                 continue
             elif [[ $from == "e8" && $to == "c8" ]]; then
                 # Black queenside castling
-                board[0]=". . k r q b n r "
+                board[0]=". . k r . ${board[0]:10:16}"
                 continue
             fi
         fi
