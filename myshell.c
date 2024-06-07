@@ -46,7 +46,7 @@ void cd(const char *path)
 void history()
 {
     // we simply print the history of commands
-    for (int i = numOfCmd - 1; i >= 0; i--)
+    for (int i = 0; i < numOfCmd; i++)
     {
         printf("%s\n", historyOfCmds[i]);
     }
@@ -55,12 +55,8 @@ void history()
 // function that adds a command to the history of commands
 void addCmdToHistory(char *cmd)
 {
-    // tokenize the command to get the first token (the command itself)
-    char temp[100];
-    strcpy(temp, cmd);
-    char *token = strtok(temp, " ");
-    // we add the command (without arguments) to the history of commands
-    strcpy(historyOfCmds[numOfCmd], token);
+    // we add the entire command to the history of commands
+    strcpy(historyOfCmds[numOfCmd], cmd);
     // we increment the number of commands
     numOfCmd++;
 }
@@ -172,11 +168,13 @@ int main(int argc, char const *argv[])
             }
             else if (pid < 0)
             {
+                // print an error message if the fork failed
                 perror("fork() error");
                 exit(1);
             }
             else
             {
+                // we add the command to the history of commands
                 addCmdToHistory(command);
                 wait(&status);
             }
