@@ -77,7 +77,7 @@ void addToEnvPATH(char path[100])
     setenv("PATH", newPath, 1);
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
     // we add the paths to the PATH environment variable if those are provided
     if (argc > 1)
