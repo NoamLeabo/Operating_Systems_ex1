@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
             if (pid == 0)
             {
                 execvp(args[0], args); // Use execvp to pass the arguments
-                perror("execvp() error"); 
+                perror("exec failed"); 
                 exit(1);
             }
             else if (pid < 0)
